@@ -461,7 +461,7 @@ class EnsembleSampler(object):
             probnew = self.log_prob_fn(pnew)
             log_prob[np.isnan(log_prob)==True]=probnew
             print("new p: ", pnew, "new prob: ",probnew )
-            raise ValueError("Probability function returned NaN")
+            #raise ValueError("Probability function returned NaN")
 
 
         return log_prob, blob

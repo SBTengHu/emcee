@@ -8,6 +8,7 @@ from .moves import StretchMove
 from .pbar import get_progress_bar
 from .state import State
 from .utils import deprecated, deprecation_warning
+from IPython import embed
 
 __all__ = ["EnsembleSampler", "walkers_independent"]
 
@@ -453,7 +454,9 @@ class EnsembleSampler(object):
 
         # Check for log_prob returning NaN.
         if np.any(np.isnan(log_prob)):
+            embed()
             raise ValueError("Probability function returned NaN")
+
 
         return log_prob, blob
 

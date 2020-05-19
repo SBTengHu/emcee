@@ -454,13 +454,13 @@ class EnsembleSampler(object):
 
         # Check for log_prob returning NaN.
         if np.any(np.isnan(log_prob)):
-            embed()
             print(p[np.isnan(log_prob)==True],"Probability function returned NaN")
             print("Manually change it to -1e300")
-            newp=np.mean(p(log_prob== -1e300),axis =0)
+            pnew=np.mean(p[(log_prob)>-1e100],axis=0)
             print("new p: ",newp)
-            p[np.isnan(log_prob) == True]= newp
-            log_prob[np.isnan(log_prob)==True]=-1e300
+            p[np.isnan(log_prob) == True]= pnew
+            probnew = self.log_prob_fn(pnew)
+            log_prob[np.isnan(log_prob)==True]=probnew
             #raise ValueError("Probability function returned NaN")
 
 
